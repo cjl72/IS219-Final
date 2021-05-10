@@ -7,5 +7,6 @@ export default function generateTable(table, data) {
       const text = document.createTextNode(element[key]);
       cell.appendChild(text);
     }
+
   }
 }
