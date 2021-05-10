@@ -7,6 +7,7 @@ const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const expressSession = require('express-session');
 require('dotenv').config();
+const authRouter = require('./routes/auth');
 const citiesRoutes = require('./routes/cities.routes');
 
 const app = express();
@@ -72,6 +73,8 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((user, done) => {
     done(null, user);
 });
+
+app.use('/', authRouter);
 
 // using as middleware
 
