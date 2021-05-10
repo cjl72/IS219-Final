@@ -2,6 +2,10 @@ const express = require('express');
 const open = require('open');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const passport = require('passport');
+const Auth0Strategy = require('passport-auth0');
+const session = require('express-session');
+require("dotenv").config();
 
 const app = express();
 app.use(cors());
