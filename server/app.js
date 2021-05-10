@@ -1,11 +1,14 @@
 const express = require('express');
+const path = require('path');
 const open = require('open');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
-const session = require('express-session');
-require("dotenv").config();
+const expressSession = require('express-session');
+require('dotenv').config();
+const citiesRoutes = require('./routes/cities.routes');
+
 
 const app = express();
 app.use(cors());
@@ -22,13 +25,27 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 
+app.use('/api/v1/cities', citiesRoutes);
+
+const session = {
+  secret: process.env.SESSION_SECRET,
+  cookie: {},
+  resave: false,
+  saveUninitialized: false
+};
+
+if (app.get("env") === "production") {
+  // Serve secure cookies, requires HTTPS
+  session.cookie.secure = true;
+}
+
 // define a root route
 
-// Require employee routes
-const citiesRoutes = require('./routes/cities.routes');
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use(expressSession(session));
 
 // using as middleware
-app.use('/api/v1/cities', citiesRoutes);
 
 app.set('port', process.env.PORT || 8000);
 app.set('ip', process.env.NODEJS_IP || '127.0.0.1');
