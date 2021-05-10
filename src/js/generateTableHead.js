@@ -1,3 +1,5 @@
+/* global document */
+
 export default function generateTableHead(table, data) {
   const thead = table.createTHead();
   const row = thead.insertRow();
