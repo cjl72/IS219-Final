@@ -1,15 +1,7 @@
 /* global XMLHttpRequest */
-export default function deleteButton(url, callback) {
+export default function deleteButton(url) {
     const xhr = new XMLHttpRequest();
     xhr.open('DELETE', url, true);
     xhr.responseType = 'json';
-    xhr.onload = () => {
-        const { status } = xhr;
-        if (status === 200) {
-            callback(null, xhr.response);
-        } else {
-            callback(status, xhr.response);
-        }
-    };
     xhr.send();
 }

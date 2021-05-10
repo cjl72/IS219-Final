@@ -1,8 +1,11 @@
 /* global document */
+import deleteButton from './deleteButton';
+
 export default function generateTable(table, data) {
   for (const element of data) {
     const row = table.insertRow();
     console.log(element);
+    const id = element.id;
     for (const key in element) {
       const cell = row.insertCell();
       const text = document.createTextNode(element[key]);
@@ -15,6 +18,7 @@ export default function generateTable(table, data) {
     const cell2 = row.insertCell();
     const b2 = document.createElement('button');
     b2.innerText = 'Delete';
+    b2.onclick = deleteButton('http://localhost:8000/api/v1/cities'+ id.toString());
     cell2.appendChild(b2);
   }
 }
