@@ -42,7 +42,7 @@ exports.update = function (req, res) {
 };
 
 exports.delete = function (req, res) {
-  City.delete(req.params.id, (err, employee) => {
+  City.delete(req.params.id, (err) => {
     if (err) { res.send(err); }
     res.json({ error: false, message: 'Employee successfully deleted' });
   });

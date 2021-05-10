@@ -18,7 +18,7 @@ export default function generateTable(table, data) {
     const cell2 = row.insertCell();
     const b2 = document.createElement('button');
     b2.innerText = 'Delete';
-    b2.onclick = deleteButton('http://localhost:8000/api/v1/cities'+ id.toString());
+    b2.addEventListener("click", deleteApiRequest.bind(this, 'http://localhost:8000/api/v1/cities/', element.id));
     cell2.appendChild(b2);
   }
 }
